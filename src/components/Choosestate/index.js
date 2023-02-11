@@ -23,7 +23,7 @@ const ChooseStateComponents = ()=>{
     const APIKEY = '19a2b8f362cde947c8c6e789940d3cbc';
     let lat = city && city.lat ? city.lat : '';
     let long = city && city.lng ? city.lng : '';
-    let exclude = 'hourly,minutely';
+   // let exclude = 'hourly,minutely';
     const ULR =  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${APIKEY}`
     
     const fetchData = ()=>{
