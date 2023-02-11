@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import cities from '../../data/np.json'
+import axios from "axios";
 import { UseWeatherAppContext } from '../../context/Context';
-import axios from 'axios';
+
 const ChooseStateComponents = ()=>{
     
     const{state:{city},dispatch} = UseWeatherAppContext();
@@ -19,14 +20,14 @@ const ChooseStateComponents = ()=>{
             payload:selectedcity
         })
     }
-    const APIKEY = '546dae70c8bf153f5c79dd1abe35bbe1';
+    const APIKEY = '19a2b8f362cde947c8c6e789940d3cbc';
     let lat = city && city.lat ? city.lat : '';
     let long = city && city.lng ? city.lng : '';
     let exclude = 'hourly,minutely';
-    const URL =  `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=${exclude}&units=metric&lang=tr&appid=${APIKEY}`
+    const ULR =  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${APIKEY}`
     
     const fetchData = ()=>{
-        axios(URL).then((data)=>{
+        axios(ULR).then((data)=>{
             console.log(data)
         }
 
