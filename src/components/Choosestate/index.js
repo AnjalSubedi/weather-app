@@ -1,63 +1,63 @@
-import React, { useEffect } from 'react';
-import cities from '../../data/np.json'
+import React, {useEffect} from 'react';
+import cities from '../../data/np.json';
+
 import axios from "axios";
-import { UseWeatherAppContext } from '../../context/Context';
+
+import  {UseWeatherAppContext} from '../../Context/Context';
 
 const ChooseStateComponents = ()=>{
     
-    const{state:{city},dispatch} = UseWeatherAppContext();
-    console.log('UseWeatherAppContext',UseWeatherAppContext());
-   
-    const handlechange=(e)=>{
-        const selectedcity = cities.filter((city)=>{
-           return city.city === e.target.value
-        }
 
+    const {state:{city}, dispatch} = UseWeatherAppContext();
+    //console.log('rohit',UseWeatherAppContext())
+
+    const handleChange = (e)=>{
+        const selectedCity = cities.filter(
+            (city) => city.city === e.target.value
         )[0]
-        // console.log(selectedcity);
-        dispatch ({
+        //console.log('selectedCity', selectedCity);
+        dispatch({
             type:'SET_CITY',
-            payload:selectedcity
+            payload:{...selectedCity}
         })
     }
-    const APIKEY = '19a2b8f362cde947c8c6e789940d3cbc';
+
+    // API VAR
+    const APIKEY = '34480b98aa332da53123a0ac63a4ea9d';
     let lat = city && city.lat ? city.lat : '';
     let long = city && city.lng ? city.lng : '';
-   // let exclude = 'hourly,minutely';
-    const ULR =  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${APIKEY}`
+    let exclude = 'hourly,minutely';
+    const ULR =  `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=${exclude}&units=metric&lang=tr&appid=${APIKEY}`
     
     const fetchData = ()=>{
         axios(ULR).then((data)=>{
-            console.log(data)
-        }
-
-        )
+            let _daily = data.data.daily
+            dispatch({
+                type:'SET_DAILY',
+                payload:_daily
+            })
+            
+            //console.log('data',data.data)
+        })
     }
-     useEffect(()=>{
-        fetchData();
-        // eslint-disable-next-line
-     },[city]
-
-     )
+    useEffect(()=>{
+       fetchData();
+       // eslint-disable-next-line
+    }, [city])
 
     return (
         <>
             <div className='stateWrap'>
-                <select className='stateMenu' defaultValue={city} onChange={handlechange} >
+                <select className='stateMenu' defaultValue={city} onChange={handleChange}>
                     {
-                cities && cities.length > 0  && cities.map((city)=>{
-
-                    return(
-                        <option key={`${city.population}${city.lat}`} value={city.city}>
-                            {city.city}
-                            </option>
-                    
-                    )
-
-                })
-        
-            }
-                    
+                        cities && cities.length > 0  && cities.map((city)=>{
+                            return(
+                                <option key={`${city.population}${city.lat}`} value={city.city}>
+                                    {city.city} 
+                                </option>
+                            )
+                        })
+                    }
                 </select>
             </div>
         </>
