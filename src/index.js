@@ -7,7 +7,7 @@ import WeatherAPPProvider from './Context/Context';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <WeatherAPPProvider>
-     <App />
+    <App />
     </WeatherAPPProvider>
    
  
