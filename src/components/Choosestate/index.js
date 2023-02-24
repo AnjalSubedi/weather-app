@@ -22,7 +22,7 @@ const ChooseStateComponents = ()=>{
         })
     }
 
-    // API VAR
+     API VAR
     const APIKEY = '34480b98aa332da53123a0ac63a4ea9d';
     let lat = city && city.lat ? city.lat : '';
     let long = city && city.lng ? city.lng : '';
@@ -47,20 +47,20 @@ const ChooseStateComponents = ()=>{
 
     return (
         <>
-            <div className='stateWrap'>
+                <div className='stateWrap'>
                 <select className='stateMenu' defaultValue={city} onChange={handleChange}>
-                    {
-                        cities && cities.length > 0  && cities.map((city)=>{
-                            return(
-                                <option key={`${city.population}${city.lat}`} value={city.city}>
-                                    {city.city} 
-                                </option>
+                  {
+                       cities && cities.length > 0  && cities.map((city)=>{
+                                return(
+                        <option key={`${city.population}${city.lat}`} value={city.city}>
+                                  {city.city} 
+                                  </option>
                             )
                         })
-                    }
-                </select>
-            </div>
-        </>
+                 }
+             </select>
+           </div>
+           </>
     )
 }
 
