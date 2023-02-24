@@ -28,7 +28,7 @@ const WeatherAPPProvider = ({children})=>{
     
     return (
         <WeatherAPPContext.Provider value={{state, dispatch}} >
-            {children}
+         {children}
         </WeatherAPPContext.Provider>
     )
 }
